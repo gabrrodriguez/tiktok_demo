@@ -3,7 +3,7 @@
 # Architecture
 
 <p align: center>
-    <img>
+    <img width="1015" alt="image" src="https://github.com/gabrrodriguez/tiktok_demo/assets/126508932/fbc00596-f7da-49e8-86d0-25a3a01bcd56">
 </p>
 
 ----------
