@@ -42,7 +42,7 @@ npm start
 6. Under _Basic Information_ select the `Change the default exection role` to select the role created in 
 
 <p align: center>
-    <img width="1565" alt="image" src="https://github.com/gabrrodriguez/tiktok_demo/assets/126508932/b4f18433-d442-4253-9d61-19cf15387a36">
+    <img width="1571" alt="image" src="https://github.com/gabrrodriguez/tiktok_demo/assets/126508932/a03ee082-bb6e-4135-86d0-c2458298e722">
 </p>
 
 
