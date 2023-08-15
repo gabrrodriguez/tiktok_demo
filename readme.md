@@ -6,12 +6,22 @@
     <img>
 </p>
 
-# React
+----------
 
+## React
+1. Run command 
+```js
+npm create-react-app front-end
+```
+2. Update `App.js` file as specified in files here.
+3. Run command
+```js
+npm start
+```
 
 ----------
 
-# AWS
+## AWS
 ## IAM 
 1. Go to console, and select the IAM Service
 2. Go to `Roles` > `Create Role` 
