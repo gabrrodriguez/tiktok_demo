@@ -36,16 +36,13 @@ npm start
 ### Lambda Function 
 1. Go to console, and select the Lambda Service
 2. Go to `Create function` > `Author from Scratch`
-3. Under _Basic Information_ proivde the Lambda a name > (e.g. _file-upload-system-backend_)
-4. Under _Basic Information_ select the Runtimes as Node.js 18x
-5. Under _Basic Information_ proivde the Architecture as x86_64
-6. Under _Basic Information_ select the `Change the default exection role` to select the role created in 
+3. Complete _Basic Information_ like the screenshot below: 
 
 <p align: center>
-    <img width="1571" alt="image" src="https://github.com/gabrrodriguez/tiktok_demo/assets/126508932/a03ee082-bb6e-4135-86d0-c2458298e722">
+    <img width="350" alt="image" src="https://github.com/gabrrodriguez/tiktok_demo/assets/126508932/a03ee082-bb6e-4135-86d0-c2458298e722">
 </p>
 
-
+4. 
 
 
 --------
