@@ -75,7 +75,7 @@ Modify the Basic Settings to look like this:
     <img width="350" alt="image" src="https://github.com/gabrrodriguez/tiktok_demo/assets/126508932/4a913a2f-44a9-4173-bfb6-3253434f96b7">
 </p>
 
-8. In the lambda function we will be implementing 3 files: 1. index.mjs 2. file-processing-service.js & 3. util.js. Create files and update file content according to the screen shots below.
+8. In the lambda function we will be implementing 3 files: 1. index.mjs 2. file-processing-service.js & 3. util.js. Create files and update file content according to the screen shots below. The code is provided below or the files are provided in the directory structure under `lambdaFunction`.
 
 #### index.mjs file 
 
