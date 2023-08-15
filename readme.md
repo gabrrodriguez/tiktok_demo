@@ -20,6 +20,14 @@ npm start
 ```
 ----------
 
+## Data 
+1. The data format is `parquet`
+2. The understood file size for the production workload is 1TB/file. At the moment the sample files are parquet ~100MB. 
+
+> ACTION: We will need to have an example file. We will also need a detailed understanding the parsing, storage, encryption, model, and retention rules around these data files. 
+
+-----------
+
 ## AWS
 ### IAM 
 1. Go to console, and select the IAM Service
@@ -33,6 +41,9 @@ npm start
 -------
 
 ### Lambda Function 
+
+> ACTION: Lambda is a regional service, this when coupled with API Gateway (also a regional service) may drive a discussion about Advertisor density. This may not be an issue depending on processing time, but it may increase cost or upload time if there is tremendous geographic disperity btwn Region and Advertisors. 
+
 1. Go to console, and select the Lambda Service
 2. Go to `Create function` > `Author from Scratch`
 3. Complete _Basic Information_ like the screenshot below: 
@@ -64,7 +75,93 @@ Modify the Basic Settings to look like this:
     <img width="350" alt="image" src="https://github.com/gabrrodriguez/tiktok_demo/assets/126508932/4a913a2f-44a9-4173-bfb6-3253434f96b7">
 </p>
 
-8. In the lambda function you want to update the code as follows: 
+8. In the lambda function we will be implementing 3 files: 1. index.mjs 2. file-processing-service.js & 3. util.js. Create files and update file content according to the screen shots below.
+
+#### index.mjs file 
+
+<p>
+<img width="350" alt="image" src="https://github.com/gabrrodriguez/tiktok_demo/assets/126508932/4ff0198b-6087-4927-8b31-1a7a68383f72">
+</p>
+
+```js
+const fileProcessingService = require('./file-processing-service')
+const util = require('./util')
+const fileUploadPath = require('/fileupload')
+
+export const handler = async (event) => {
+  console.log('Request Event ', event)
+  let response
+  
+  switch(true){
+    case event.httpMethod === 'POST' === event.path === fileUploadPath:
+      response = await fileProcessingService.process(event.body)
+      break
+    default:
+      response = util.buildResponse(404)
+  }
+  return response
+};
+```
+
+#### file-processing-service.js
+
+<p>
+    <img width="350" alt="image" src="https://github.com/gabrrodriguez/tiktok_demo/assets/126508932/eaa675c8-2786-4628-af8d-221c8a0e48c2">
+</p>
+
+```js
+const AWS = require('aws-sdk')
+const s3 = new AWS.S3()
+const util = require('./util')
+/*global Data*/
+/*global s3Subfolder*/
+
+const bucketName = 'tiktok-rawfile-upload-prototype'
+const subFolder = 'data'
+
+async function process(requestBody) {
+    const fileName = requestBody.split('\r\n')[1].split(';')[2].split('=')[1].replace(/^"|"$/g, '').trim()
+    let fileContent = requestBody.split('\r\n')[4].trim()
+    // processing of the file content -- this example could include validations of data or admin process such as naming conventions, etc.
+    fileContent += `\n\nProcess Timestamp: ${new Date().toISOString()}`;
+    const params = {
+        Bucket: bucketName,
+        Key: `${s3Subfolder}/${fileName}`,
+        Body: fileContent
+    }
+    await s3.putObject(params).promise()
+    return util.buildResponse(200)
+}
+
+module.exports.process = process
+```
+
+#### utils.js 
+
+<p>
+    <img width="350" alt="image" src="https://github.com/gabrrodriguez/tiktok_demo/assets/126508932/dc803780-6751-4cf8-8a13-b00d9f0d9544">
+</p>
+
+```js
+function buildResponse(statusCode, body) {
+    return {
+        statusCode: statusCode,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    }
+}
+
+module.exports.buildResponse = buildResponse
+```
+
+9. Once all the files have been created, click `Deploy`. If all worked correctly you will see a screenshot similar to the following: 
+
+<p>
+    <img width="350" alt="image" src="https://github.com/gabrrodriguez/tiktok_demo/assets/126508932/d9e7942b-7e10-4d00-966d-b483c4fec4e9">
+</p>
 
 --------
 
