@@ -72,7 +72,7 @@ Modify the Basic Settings to look like this:
 2. Click `Create Bucket`
 3. Under `Create Bucket` > `General Configuration` provide a bucket name and select a region for deployment. The configuration for the prototype is as follows: 
 
-<p align: center>
+<p align: "center">
     <img width="350" alt="image" src="https://github.com/gabrrodriguez/tiktok_demo/assets/126508932/ae447056-be1e-4c68-a14b-5a7e2e842b31">
 </p>
 
