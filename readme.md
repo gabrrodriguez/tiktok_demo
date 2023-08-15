@@ -22,7 +22,7 @@ npm start
 ----------
 
 ## AWS
-## IAM 
+### IAM 
 1. Go to console, and select the IAM Service
 2. Go to `Roles` > `Create Role` 
 3. Choose `Lambda` > Click `Next`
@@ -33,7 +33,7 @@ npm start
 
 -------
 
-## Lambda Function 
+### Lambda Function 
 1. 
 
 
