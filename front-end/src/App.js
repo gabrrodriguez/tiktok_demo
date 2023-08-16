@@ -1,5 +1,7 @@
 import './App.css';
 import React, { Component } from 'react'
+import axios from 'axios'
+
 
 class App extends Component {
   state = {
@@ -40,17 +42,31 @@ class App extends Component {
   }
 
   onFileUpload = () => {
-    const formData = new FormData()
+    let formData = new FormData()
     formData.append(
       "demo file",
       this.state.selectedFile,
       this.state.selectedFile.name
     )
-    // call the api
-    console.log(formData)
-    this.setState({selectedFile: null})
-    this.setState({fileSuccessfullyUploaded: true})
 
+    // call the api
+    try {
+      axios.post({
+        method: 'POST',
+        url:'https://dp28i48834.execute-api.us-west-1.amazonaws.com/prod/fileupload',
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json'
+        }, 
+        data: formData
+      })
+        .then(() => {
+        this.setState({selectedFile: null})
+        this.setState({fileSuccessfullyUploaded: true})
+      })
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   render() {
@@ -65,7 +81,6 @@ class App extends Component {
       </div>
     )
   }
-
 }
 
 export default App;
